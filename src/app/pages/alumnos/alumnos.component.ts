@@ -73,27 +73,3 @@ export class AlumnosComponent implements OnInit {
 
 }
 
-/*
-
-insert into students (id, id_work_center, matricula, activo, nombre, ape_paterno, ape_materno, genero, generacion,
-                      municipio, pais, fecha_nacimiento)
-getCentrosDeTrabajo(){
-    this.appService.getCentrosDeTrabajo().subscribe({
-      next: (response)=>{
-        console.log(response);
-        
-        if(response.status){
-          
-          this.centros = response.centros_de_trabajo;
-        }else{
-          
-          this.centros = [];
-        }
-      },
-      error: (error) => {
-        
-      }
-    });
-
-  }
-*/

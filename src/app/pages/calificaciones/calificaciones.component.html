@@ -4,7 +4,89 @@
             <h1 class="text-primary text-center">Calificaciones</h1>
         </div>
     </div>
-    <div class="row mt2">
-       
+    <div class="row mt2" *ngIf="isLoading && !error">
+        <div class="col-md-12 text-center">
+             <div class="spinner-border text-primary" role="status">
+                 <span class="visually-hidden">Loading...</span>
+             </div>
+        </div>
     </div>
+    <div class="row mt2" *ngIf="!isLoading && error">
+        <div class="col-md-12 text-center">
+            <div class="p-3 mb-2 bg-danger text-white">{{message}}</div>
+       </div>
+    </div>
+    <div class="row mt2" *ngIf="!isLoading && !error">
+        <div class="col-md-12">
+            <div class="row" *ngIf="alumno">
+                <div class="col-md-12 fs-5">
+                    <b class="text-primary">Alumno: </b> <span class="text-muted">{{alumno.ape_paterno}} {{ alumno.ape_materno }} {{alumno.nombre}} ( <b>{{alumno.matricula}}</b> )</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-info">Ingrese la calificación de los parciales para registrar la calificación final</p>
+                </div>
+            </div>
+            <br>
+            <form #formCalif="ngForm" [formGroup]="form" (submit)="guardarCalificaciones()" >
+                <div class="row">
+                    <div class="col-md-12 table-responsive">
+                        <table class="table table-bordered table-striped" formArrayName="calificaciones">
+                            <thead>
+                              <tr>
+                                <th scope="col">Materia</th>
+                                <th scope="col">Parcial 1</th>
+                                <th scope="col">Parcial 2</th>
+                                <th scope="col">Parcial 3</th>
+                                <th scope="col">Calif. Final</th>
+                              </tr>
+                            </thead>
+                            <tbody *ngIf="materias.length < 1">
+                              <tr >
+                                <td colspan="5" class="text-center text-danger">No hay calificaciones para registrar</td>
+                              </tr>
+                            </tbody>
+                            <tbody *ngIf="materias.length > 0">
+                                <tr *ngFor="let materia of materias; let i=index" [formGroupName]="i">
+                                  <th scope="row">{{materia.nombre_materia}}</th>
+                                  <td>
+                                    <div class="">
+                                        <input type="number" min="0" max="100" step="1" class="form-control" formControlName="calificacion_p1" [disabled]="lockForm">
+                                    </div>
+                                  </td>
+                                  <td vertical-align="middle">
+                                    <div class="">
+                                        <input type="number" min="0" max="100" step="1" class="form-control" formControlName="calificacion_p2" [disabled]="lockForm">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="">
+                                        <input type="number" min="0" max="100" step="1" class="form-control" formControlName="calificacion_p3" [disabled]="lockForm" >
+                                    </div>
+                                  </td>
+                                  <td>
+                                      {{promedio(i)}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                          </table>
+                    </div>
+                </div>
+                <div class="row" *ngIf="!lockForm">
+                    <div class="col-md-4 offset-md-8">
+                        <button type="submit" class="btn btn-success col-md-12 text-white" 
+                            [disabled]="form.invalid">
+                            Guardar calificaciones
+                            </button>
+                    </div>
+                </div>
+                
+            </form>
+            
+
+        </div>
+    </div>
+
+
 </div>

@@ -20,4 +20,12 @@ export class AppService {
     return this.http.get(environment.api+'get/alumnos/'+itemsPerPage+'?page='+pagina+'&buscar='+buscar);
   }
 
+  getCalificacionesAlumno(id_alumno = 1): Observable<any> {
+    return this.http.get(environment.api+'get/calificaciones/alumno/'+id_alumno);
+  }
+
+  saveCalificacionesAlumno(parametros: any): Observable<any> {
+    return this.http.post(environment.api+'set/calificaciones/alumno', parametros);
+  }
+
 }
