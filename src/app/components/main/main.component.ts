@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-main',
@@ -6,14 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+  @ViewChild('tabs') private tabs?: MatTabGroup;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  getTimeLoaded(numero: Number){
-    return Date.now();
+  changeTab(event: string){
+    console.log(event);
+
   }
 
 }

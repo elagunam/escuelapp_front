@@ -2,13 +2,13 @@
     <div class="row mt-5">
       <div class="col-12 m-auto">
         <mat-card >
-          <mat-tab-group>
+          <mat-tab-group #tabs>
             <mat-tab label="Inicio">
               <ng-template matTabContent>
-                <app-inicio></app-inicio>
+                <app-inicio (optionSelectedTrigger)="tabs.selectedIndex = $event"></app-inicio>
               </ng-template>
             </mat-tab>
-            <mat-tab label="Centro">
+            <mat-tab label="Centros">
               <ng-template matTabContent>
                 <app-centros></app-centros>
               </ng-template>

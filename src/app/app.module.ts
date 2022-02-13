@@ -11,6 +11,8 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { CentrosComponent } from './pages/centros/centros.component';
 import { CalificacionesComponent } from './pages/calificaciones/calificaciones.component';
 import { AlumnosComponent } from './pages/alumnos/alumnos.component';
+import { AppService } from './services/app.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,12 @@ import { AlumnosComponent } from './pages/alumnos/alumnos.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    HttpClientModule
+    ],
+  providers: [
+    AppService
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
