@@ -53,8 +53,8 @@
                   </tr>
                 </tbody>
                 <tbody *ngIf="alumnos.length > 0">
-                    <tr *ngFor="let alumno of alumnos">
-                      <th scope="row">{{alumno.id}}</th>
+                    <tr *ngFor="let alumno of alumnos; let i = index;">
+                      <th scope="row">{{i+1}}</th>
                       <td>{{alumno.matricula}}</td>
                       <td>{{alumno.workcenter.nombre_ct}}</td>
                       <td>{{alumno.activo ? 'Alumno Activo' : 'Alumno Inactivo'}}</td>
@@ -103,46 +103,3 @@
         </div>
      </div>
 </div>
-
-<!--
-    <div class="container-fluid mt-3 pb-3">
-    
-    
-    
-     <div class="row mt2" *ngIf="!isLoading && !error">
-        <div class="col-md-12">
-            <div class="row mb-2" *ngFor="let centro of centros">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                          <div class="row mb-2">
-                            <div class="col-md-4">
-                                <span class="text-primary">Clave:</span> {{centro.clave}}
-                            </div>
-                            <div class="col-md-4">
-                                <span class="text-primary">Telebachillerato:</span> {{centro.nombre_ct}}
-                            </div>
-                            <div class="col-md-4">
-                                <span class="text-primary">Clave del Centro de Trabajo:</span> {{centro.clave_ct}}
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-4">
-                                <span class="text-primary">Municipio: </span> {{centro.municipio}}
-                            </div>
-                            <div class="col-md-4">
-                                <span class="text-primary">Encargado: </span> {{centro.encargado}}
-                            </div>
-                            <div class="col-md-4">
-                                <span class="text-primary">Correo del encargado: </span> {{centro.email_encargado}}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                </div>
-            </div>
-       </div>
-     </div>
-</div>
-
--->

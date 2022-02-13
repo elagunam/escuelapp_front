@@ -47,7 +47,6 @@ export class AlumnosComponent implements OnInit {
   getAlumnos(pagina: number){
     this.appService.getAlumnos(this.formControl['items'].value, pagina, this.formControl['buscar'].value).subscribe({
       next: (response)=> {
-        console.log(response);
         this.isLoading = false;
         this.error = false;
         this.alumnos = response.data;

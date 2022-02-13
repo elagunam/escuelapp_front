@@ -11,7 +11,6 @@ export class InicioComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('Inicio componente');
   }
 
   optionChanges(indice: string){

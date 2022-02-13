@@ -29,7 +29,6 @@ export class CentrosComponent implements OnInit {
   getCentrosDeTrabajo(){
     this.appService.getCentrosDeTrabajo().subscribe({
       next: (response)=>{
-        console.log(response);
         this.isLoading = false;
         if(response.status){
           this.error = false;

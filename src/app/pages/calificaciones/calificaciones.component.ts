@@ -42,7 +42,6 @@ export class CalificacionesComponent implements OnInit {
     this.isLoading = true;
     this.appService.getCalificacionesAlumno(this.id_alumno).subscribe({
       next: (response)=>{
-        console.log(response);
         this.isLoading = false;
         if(response.status){
           this.error = false;
@@ -77,7 +76,6 @@ export class CalificacionesComponent implements OnInit {
   }
 
   disableForm(){
-    console.log('Desabilitando');
     this.lockForm = true;
     this.form.disable();
   }

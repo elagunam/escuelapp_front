@@ -15,8 +15,6 @@ export class MainComponent implements OnInit {
   }
 
   changeTab(event: string){
-    console.log(event);
-
   }
 
 }
