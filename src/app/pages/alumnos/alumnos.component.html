@@ -4,7 +4,145 @@
             <h1 class="text-primary text-center">Alumnos</h1>
         </div>
     </div>
-    <div class="row mt2">
-       
-    </div>
+    <div class="row mt2" *ngIf="isLoading && !error">
+        <div class="col-md-12 text-center">
+             <div class="spinner-border text-primary" role="status">
+                 <span class="visually-hidden">Loading...</span>
+             </div>
+        </div>
+     </div>
+     <div class="row mt2" *ngIf="!isLoading && error">
+        <div class="col-md-12 text-center">
+            <div class="p-3 mb-2 bg-danger text-white">{{message}}</div>
+       </div>
+     </div>
+     <div class="row mt2" *ngIf="!isLoading && !error">
+         <div class="row">
+             <div class="col-md-4 offset-md-8">
+                <form #formBuscar="ngForm" [formGroup]="form">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" formControlName="buscar" aria-label="Username" aria-describedby="basic-addon1" (keyup)="changePage(paginaActual)">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                    </div>
+                </form>
+             </div>
+         </div>
+        <div class="col-md-12 table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Matrícula</th>
+                    <th scope="col">Telebachillerato</th>
+                    <th scope="col">Estatus Alumno</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Paterno</th>
+                    <th scope="col">Materno</th>
+                    <th scope="col">Genero</th>
+                    <th scope="col">Generación</th>
+                    <th scope="col">Municipio Residencia</th>
+                    <th scope="col">País Nacimiento</th>
+                    <th scope="col">Fecha Nacimiento</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="alumnos.length < 1">
+                  <tr >
+                    <td colspan="11" class="text-center text-danger">No hay resultados para mostrar</td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="alumnos.length > 0">
+                    <tr *ngFor="let alumno of alumnos">
+                      <th scope="row">{{alumno.id}}</th>
+                      <td>{{alumno.matricula}}</td>
+                      <td>{{alumno.workcenter.nombre_ct}}</td>
+                      <td>{{alumno.activo ? 'Alumno Activo' : 'Alumno Inactivo'}}</td>
+                      <td>{{alumno.nombre}}</td>
+                      <td>{{alumno.ape_paterno}}</td>
+                      <td>{{alumno.ape_materno}}</td>
+                      <td>{{alumno.genero}}</td>
+                      <td>{{alumno.generacion}}</td>
+                      <td>{{alumno.municipio}}</td>
+                      <td>{{alumno.pais}}</td>
+                      <td>{{alumno.fecha_nacimiento}}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <td colspan="3" class="text-center" >
+                            <button type="button" class="btn btn-primary text-white" 
+                            [disabled]="paginaActual <= 1" 
+                            (click)="changePage(prevPagina)">
+                                <i class="fa-solid fa-angle-left"></i> 
+                                Anterior
+                            </button>
+                          </td>
+                          <td colspan="3" class="text-center text-primary">
+                              Página <b>{{paginaActual}}</b> de <b>{{totalPaginas}}</b>
+                            </td>
+                            <td colspan="3" class="text-center">
+                                <form #formLook="ngForm" [formGroup]="form">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" formControlName="items" aria-label="Username" aria-describedby="basic-addon1" [value]="items"  (blur)="changePage(paginaActual)">
+                                        <span class="input-group-text" id="basic-addon1">Por pagina</span>
+                                    </div>
+                                </form>
+                            </td>
+                          <td colspan="3" class="text-center">
+                            <button type="button" class="btn btn-primary text-white" 
+                            [disabled]="paginaActual >= totalPaginas" 
+                            (click)="changePage(nextPagina)">
+                                Siguiente
+                                <i class="fa-solid fa-angle-right"></i> 
+                            </button>
+                          </td>
+                      </tr>
+                  </tfoot>
+              </table>
+        </div>
+     </div>
 </div>
+
+<!--
+    <div class="container-fluid mt-3 pb-3">
+    
+    
+    
+     <div class="row mt2" *ngIf="!isLoading && !error">
+        <div class="col-md-12">
+            <div class="row mb-2" *ngFor="let centro of centros">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                          <div class="row mb-2">
+                            <div class="col-md-4">
+                                <span class="text-primary">Clave:</span> {{centro.clave}}
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-primary">Telebachillerato:</span> {{centro.nombre_ct}}
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-primary">Clave del Centro de Trabajo:</span> {{centro.clave_ct}}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                                <span class="text-primary">Municipio: </span> {{centro.municipio}}
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-primary">Encargado: </span> {{centro.encargado}}
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-primary">Correo del encargado: </span> {{centro.email_encargado}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+       </div>
+     </div>
+</div>
+
+-->

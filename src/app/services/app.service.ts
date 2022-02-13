@@ -15,4 +15,9 @@ export class AppService {
   getCentrosDeTrabajo(): Observable<any> {
     return this.http.get(environment.api+'get/centros');
   }
+
+  getAlumnos(itemsPerPage = 50, pagina = 1, buscar = ''): Observable<any> {
+    return this.http.get(environment.api+'get/alumnos/'+itemsPerPage+'?page='+pagina+'&buscar='+buscar);
+  }
+
 }

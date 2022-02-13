@@ -13,6 +13,7 @@ import { CalificacionesComponent } from './pages/calificaciones/calificaciones.c
 import { AlumnosComponent } from './pages/alumnos/alumnos.component';
 import { AppService } from './services/app.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatCardModule,
     MatTabsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
     ],
   providers: [
     AppService
